@@ -1,0 +1,25 @@
+body{
+    width: 100%;
+}
+
+.container{
+    margin: 0 auto;
+    font: family roboto;
+}
+
+.container .title h2{
+    font-size: 80px;
+}
+
+
+table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.rounded-cell {
+    border-radius: 8px;
+    overflow: hidden;
+    border-color: #ddd; /* Màu xám nhạt (#ddd) */
+}
+

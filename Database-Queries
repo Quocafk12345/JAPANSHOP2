@@ -1,0 +1,177 @@
+CREATE DATABASE grocery;
+GO
+
+USE grocery;
+GO
+-- Table structure for table `admin`
+CREATE TABLE admin (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  added_date DATETIME NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+GO
+-- Dumping data for table `admin`
+
+INSERT INTO admin (added_date, email, password, name) VALUES
+(GETDATE(), 'quocntps31889@fpt.edu.vn', 'Quocvjp12345', N'Quoc');
+GO
+select*from admin
+-- Table structure for table `cart`
+CREATE TABLE cart (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  price FLOAT NOT NULL,
+  quantity INT NOT NULL,
+  total_price FLOAT NOT NULL,
+  customer_id BIGINT NOT NULL,
+  product_id BIGINT NOT NULL,
+  mrp_price FLOAT NOT NULL
+);
+GO
+
+-- Dumping data for table `cart`
+INSERT INTO cart (price, quantity, total_price, customer_id, product_id, mrp_price) VALUES
+(190, 1, 190, 1, 11, 200);
+GO
+
+-- Table structure for table `contact`
+CREATE TABLE contact (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  contact_date DATETIME NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  message NVARCHAR(1000) NOT NULL,
+  name NVARCHAR(50) NOT NULL,
+  subject NVARCHAR(50) NOT NULL
+);
+GO
+-- Dumping data for table `contact`
+INSERT INTO contact (contact_date, email, message, name, subject) VALUES
+(GETDATE(), 'quocntps31889@fpt.edu.vn', N'Xin chào mọi ngừi.', N'Quốc', 'Kiếm tra');
+GO
+-- Table structure for table `customer`
+CREATE TABLE customer (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  address VARCHAR(255) NOT NULL,
+  added_date DATETIME NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  gender VARCHAR(6) NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  password VARCHAR(60) NOT NULL,
+  phone VARCHAR(10) NOT NULL UNIQUE,
+  valid BIT NOT NULL,
+  pin_code VARCHAR(255) NOT NULL
+);
+GO
+
+-- Dumping data for table `customer`
+INSERT INTO customer(address, added_date, email, gender, name, password, phone,valid, pin_code) VALUES
+(N'Quang Binh', '2022-05-10 11:11:01', 'quocntps31889@fpt.edu.vn', 'Nam', N'Quốc', 'Quocvjp12345', '0816352559', 1, '40033');
+GO
+-- Table structure for table `orders`
+CREATE TABLE orders (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  active BIT NOT NULL,
+  amount FLOAT NOT NULL,
+  customer_address VARCHAR(255) NOT NULL,
+  customer_address_type VARCHAR(15) NOT NULL,
+  customer_email VARCHAR(50) NOT NULL,
+  customer_name VARCHAR(30) NOT NULL,
+  customer_phone VARCHAR(10) NOT NULL,
+  order_date DATETIME NOT NULL,
+  order_num INT NOT NULL UNIQUE,
+  pin_code VARCHAR(10) NOT NULL
+);
+GO
+
+-- Dumping data for table `orders`
+INSERT INTO orders (active, amount, customer_address, customer_address_type, customer_email, customer_name, customer_phone, order_date, order_num, pin_code) VALUES
+(1, 284, 'Sai Gon', 'Home', 'quocafk12345@gmail.com', 'Quoc', '1223334560', GETDATE(), 1000, '40033'),
+(1, 95, 'Sai Gon', 'Home', 'quocafk12345@gmail.com', 'Quoc', '1223334560', GETDATE(), 1001, '40033'),
+(1, 65, 'Sai Gon', 'Home', 'quocafk12345@gmail.com', 'Quoc', '1223334560', GETDATE(), 1002, '40033')
+GO
+
+-- Table structure for table `order_detail`
+CREATE TABLE order_detail (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  amount FLOAT NOT NULL,
+  price FLOAT NOT NULL,
+  quantity INT NOT NULL,
+  order_id BIGINT NOT NULL,
+  product_id BIGINT NOT NULL,
+  payment_id INT NOT NULL,
+  order_status VARCHAR(25) NOT NULL,
+  mrp_price FLOAT NOT NULL,
+  payment_mode VARCHAR(25) NOT NULL
+);
+GO
+
+-- Dumping data for table `order_detail`
+INSERT INTO order_detail (amount, price, quantity, order_id, product_id, payment_id, order_status, mrp_price, payment_mode) VALUES
+(284, 142, 2, 237, 10, 1000, 'Delivered', 150, 'COD'),
+(95, 95, 1, 238, 9, 1000, 'Delivered', 100, 'COD'),
+(65, 65, 1, 239, 5, 1000, 'Delivered', 72, 'COD');
+GO
+
+-- Table structure for table `product`
+CREATE TABLE product (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  active BIT NOT NULL,
+  code VARCHAR(5) NOT NULL UNIQUE,
+  create_date DATETIME NOT NULL,
+  description NVARCHAR(255) NOT NULL,
+  image VARCHAR(100),
+  name NVARCHAR(30) NOT NULL,
+  price FLOAT NOT NULL,
+  mrp_price FLOAT NOT NULL
+);
+GO
+
+-- Dumping data for table `product`
+INSERT INTO product (active, code, create_date, description, image, name, price, mrp_price) VALUES
+(1, 'P01', '2020-05-15 02:58:36', 'Chana Dal 1Kg', '/resources/JTurDal1kgPRMING65XX50717_1_P.jpg', N'KỀNH CHÁ NÀ 1Kg', 99, 105),
+(1, 'P02', '2020-05-15 02:59:56', 'Moong Dal 1kg', '/resources/JMoongDal1kgPRMING58XX50717_1_P.jpg', 'Moong Dal 1kg', 160, 168),
+(1, 'P03', '2020-05-15 03:02:21', 'Premium Toor Dal 1kg', '/resources/JTurDal1kgPRMING65XX50717_1_P.jpg', 'Premium Toor Dal 1kg', 120, 125),
+(1, 'P04', '2020-05-15 03:03:41', 'Premium Urad Dal 1kg', '/resources/JUradDal500gmPRMING72XX50717_1_P.jpg', 'Urad Dal 1kg', 160, 165),
+(1, 'P05', '2020-05-15 03:05:06', 'Best Quality Masoor Dal 500gm', '/resources/JMasoorDal1kgPRMING55XX50717_1_P.jpg', 'Masoor Dal 500gm', 65, 72),
+(1, 'P06', '2020-05-15 03:12:16', 'Premium Quality Singdana', '/resources/images.jpg', 'Singdana(Groundnut) 1kg', 160, 165),
+(1, 'P07', '2020-05-15 03:13:44', 'Premium Quality singdana', '/resources/images.jpg', 'Singdana(Groundnut) 500gm', 70, 75),
+(1, 'P08', '2020-05-29 01:01:54', 'Kabuli Chana 500gm', '/resources/download.jpg', 'Kabuli Chana 500gm', 70, 75),
+(1, 'P09', '2020-07-25 19:42:35', 'Green Moong Dal 500gm', '/resources\\Green Moong.jpg', 'Green Moong Dal', 95, 100),
+(1, 'P10', '2020-07-25 19:43:27', 'Sabudana 1kg', '/resources\\Webp.net-resizeimage (4).jpg', 'Sabudana ', 142, 150),
+(1, 'P11', '2020-07-25 20:04:32', 'Rajma 1kg', '/resources\\Webp.net-resizeimage.jpg', 'Rajma', 190, 200);
+GO
+
+select*from product
+
+-- AUTO_INCREMENT for table `admin`
+DBCC CHECKIDENT ('admin', RESEED, 1);
+GO
+
+-- AUTO_INCREMENT for table `cart`
+DBCC CHECKIDENT ('cart', RESEED, 5);
+GO
+
+-- AUTO_INCREMENT for table `contact`
+DBCC CHECKIDENT ('contact', RESEED, 2);
+GO
+
+-- AUTO_INCREMENT for table `customer`
+DBCC CHECKIDENT ('customer', RESEED, 8);
+GO
+
+-- AUTO_INCREMENT for table `orders`
+DBCC CHECKIDENT ('orders', RESEED, 239);
+GO
+
+-- AUTO_INCREMENT for table `order_detail`
+DBCC CHECKIDENT ('order_detail', RESEED, 234);
+GO
+
+-- AUTO_INCREMENT for table `product`
+DBCC CHECKIDENT ('product', RESEED, 11);
+GO
+SELECT order_id
+FROM order_detail
+WHERE order_id NOT IN (SELECT id FROM orders);
+

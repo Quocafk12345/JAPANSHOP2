@@ -1,0 +1,72 @@
+.navbar{
+    padding: 10px 40px;
+    margin: 0;
+    background-color: #fff;
+    width: 100%;
+}
+
+.navbar .navbar-brand{
+    display: flex;
+    place-items: center;
+}
+
+.navbar .navbar-brand .navbar-logo{
+    width: 100%;
+    max-width: 50px;
+}
+
+.navbar .navbar-brand .brand-name{
+    color: #73c41d;
+}
+
+.navbar .navbar-brand .brand-name Span{
+    color: #394130;
+}
+
+.navbar .search {
+    padding: 0;
+    border-bottom: 1px solid #000;
+}
+
+.navbar .search input{
+    border: none;
+    padding: 10px 20px;
+    background: none;
+    &:focus{
+        outline: none;
+    }
+
+}
+
+.navbar .search button{
+    border: none;
+    background: none;
+    padding: 5px 20px;   
+}
+
+.navbar .navbar-toggler{
+    border: none;
+    &:focus{
+        outline: none;
+    }
+}
+
+.navbar .navbar-nav .nav-item{
+    overflow: hidden;
+    margin: 0 10px;
+    font-weight: 700;
+}
+
+.navbar .navbar-nav .nav-item .nav-link{
+    color: #000;
+    &:hover{
+        text-decoration: underline;
+        text-decoration-color: #000 ;
+    }
+}
+
+.navbar .navbar-btn .btn-group button {
+    padding: 5px 10px;
+    border: none;
+    background: none;
+}
