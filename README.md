@@ -1,5 +1,5 @@
-# Printing-website-Full-Stack-project
-It is a grocery store which is made using spring boot , Jsp and servlet.
+# JAPANSHOP-website-Full-Stack-project
+It is a JAPANSHOP STORE which is made using spring boot , Jsp and servlet.
 
 
 # springboot-sample-app
